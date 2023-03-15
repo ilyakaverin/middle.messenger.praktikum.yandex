@@ -1,0 +1,15 @@
+include ../../components/text-input/index.pug
+include ../../components/form-container/form-container.pug
+include ../../components/button/index.pug
+    
++fieldset-with-legend('Account edit', 'account_edit', 'hidden')
+    form(action="")
+        block text-input
+            +text-input('text','Name', 'first_name')
+            +text-input('text','Surname', 'second_name')
+            +text-input('text','Dispay name', 'display_name')
+            +text-input('text','Login', 'login')
+            +text-input('email','E-mail', 'e-mail')
+            +text-input('phone','Phone number', 'phone')
+            +button('Save', 'green')
+            +button('Change password', 'purple')

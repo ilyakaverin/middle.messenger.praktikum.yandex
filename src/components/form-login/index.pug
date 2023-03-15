@@ -1,0 +1,11 @@
+include ../../components/text-input/index.pug
+include ../../components/form-container/form-container.pug
+include ../../components/button/index.pug
+    
++fieldset-with-legend('Login', 'login')
+    form(action="")
+        block text-input
+            +text-input('text','Login')
+            +text-input('password','Password')
+            +button('Enter', 'green')
+            +button('Register', 'purple')

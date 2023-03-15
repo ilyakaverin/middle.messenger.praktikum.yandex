@@ -1,12 +1,14 @@
 {
   "name": "middle.messenger.praktikum.yandex",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "version": "0.0.1",
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
-  "main": "index.js",
+  "main": "src/pages/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node src/server.mjs",
-    "start": "parcel static/index.html"
+    "server": "node server.mjs",
+    "start": "parcel src/pages/index.pug",
+    "build": "parcel build"
   },
   "engines": {
     "node": ">=14.21.3"
@@ -25,15 +27,21 @@
   },
   "homepage": "https://github.com/ilyakaverin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@parcel/config-default": "^2.8.3",
+    "@parcel/transformer-pug": "^2.8.3",
     "@parcel/transformer-sass": "^2.8.3",
+    "assert": "^2.0.0",
+    "buffer": "^5.7.1",
     "eslint": "^8.35.0",
-    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
-    "handlebars": "^4.7.7",
-    "parcel": "^2.8.3"
+    "os-browserify": "^0.3.0",
+    "parcel": "^2.8.3",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "pug": "^3.0.2"
   }
 }

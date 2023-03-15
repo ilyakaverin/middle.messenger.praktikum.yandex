@@ -1,0 +1,14 @@
+.chat__container {
+    width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-gap: 15px;
+    
+    &_inner {
+        display: grid;
+        grid-template-rows: 3fr 1fr;
+        gap: 25px
+      }
+  }
+ 

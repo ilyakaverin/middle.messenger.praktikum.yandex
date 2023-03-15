@@ -1,0 +1,11 @@
+include ../chat-list-user/index.pug
+include ../button/index.pug
+
+div(class="chatlist_container")
+    include ../chat-search/index.pug
+    div.chatlist__users
+        +user('Саша')
+        +user('Петя')
+        +user('Вася')
+    +button('logout', 'purple')
+    +button('Edit profile', 'green')
