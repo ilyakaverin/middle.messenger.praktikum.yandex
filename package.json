@@ -3,12 +3,11 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "version": "0.0.1",
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
-  "main": "src/pages/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.mjs",
     "start": "parcel src/pages/index.pug",
-    "build": "parcel build"
+    "build": "parcel build src/pages/index.pug"
   },
   "engines": {
     "node": ">=14.21.3"

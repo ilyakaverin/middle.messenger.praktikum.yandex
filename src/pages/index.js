@@ -45,13 +45,17 @@ const changePassword = document.getElementById('change_password');
 const accountEdit = document.getElementById('account_edit');
 const chat = document.getElementById('chat_container');
 
-const route1 = router(enter, login, chat);
-const route2 = router(logout, chat, login);
-const route3 = router(registerButton, login, register);
-const route4 = router(editProfile, chat, accountEdit);
-const route5 = router(changePasswordButton, accountEdit, changePassword);
-const route6 = router(backToLogin, register, login);
-const route7 = router(createProfile, register, chat);
-const route8 = router(saveAndExit, changePassword, accountEdit);
-const route9 = router(backToEdit, changePassword, accountEdit);
-const router10 = router(accountEditSave, accountEdit, chat);
+router(enter, login, chat);
+router(logout, chat, login);
+router(registerButton, login, register);
+router(editProfile, chat, accountEdit);
+router(changePasswordButton, accountEdit, changePassword);
+router(backToLogin, register, login);
+router(createProfile, register, chat);
+router(saveAndExit, changePassword, accountEdit);
+router(backToEdit, changePassword, accountEdit);
+router(accountEditSave, accountEdit, chat);
+
+// Понимаю что может быть не то что ожидали.
+// если это совсем не катит, то вернусь к этому позже.
+// либо на этапе разработки роутера сделаю как надо

@@ -1,8 +1,7 @@
 {
   "extends": "@parcel/config-default",
   "transformers": {
-    "*.hbs": ["@anikin/parcel-transformer-handlebars"],
-    "raw": ["@parcel/transformer-raw"]
+    "*.hbs": ["@anikin/parcel-transformer-handlebars"]
   }
 
 }
