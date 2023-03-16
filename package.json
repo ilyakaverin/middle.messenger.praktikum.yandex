@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.mjs",
-    "start": "parcel src/pages/index.pug",
+    "start": "parcel src/pages/index.pug -p 3000",
     "build": "parcel build src/pages/index.pug"
   },
   "engines": {
