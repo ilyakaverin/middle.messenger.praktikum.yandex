@@ -1,0 +1,13 @@
+include ../../components/text-input/index.pug
+include ../../components/form-container/form-container.pug
+include ../../components/button/index.pug
+    
++fieldset-with-legend('Change password', 'change_password', 'hidden')
+    form(action="")
+        block text-input
+            +text-input('password','Old Password', 'old_password')
+            +text-input('password','New Password', 'new_password')
+            +text-input('password','Confirm Password')
+            +button('Save and exit', 'green')
+            +button('Back to edit', 'purple')
+            

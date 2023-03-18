@@ -1,0 +1,15 @@
+.button {
+    box-shadow: 10px 10px black;
+    padding: 10px;
+    font-family: inherit;
+
+}
+.green {
+    background-color: #00A800;
+}
+.purple {
+    background-color: #A800A8;
+}
+.inactive {
+    pointer-events: none;
+}

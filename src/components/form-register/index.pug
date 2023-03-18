@@ -1,0 +1,16 @@
+include ../../components/text-input/index.pug
+include ../../components/form-container/form-container.pug
+include ../../components/button/index.pug
+    
++fieldset-with-legend('Register', 'register', 'hidden')
+    form(action="")
+        block text-input
+            +text-input('text','Name', 'first_name')
+            +text-input('text','Surname', 'second_name')
+            +text-input('text','Login', 'login')
+            +text-input('email','e-mail', 'email')
+            +text-input('password','Password', 'password')
+            +text-input('phone','Phone number', 'phone')
+            +button('Create profile', 'green')
+            +button('Back to login', 'purple')
+            

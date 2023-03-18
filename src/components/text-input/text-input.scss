@@ -1,0 +1,16 @@
+.text-input {
+    background-color: #000000;
+    padding: 15px;
+    outline: 0;
+    caret-color: aliceblue;
+    color: white;
+    border-radius: 5px;
+    font-family: inherit;
+    &::placeholder {
+        color: #A8A8A8
+    }
+}
+.chatlist__input {
+    border-radius: 0;
+    border: transparent;
+}
