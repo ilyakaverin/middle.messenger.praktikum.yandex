@@ -1,7 +1,8 @@
 include ../../components/chat-container/index.pug
 
 +chat-container('chat__container hidden', 'chat_container')
-    include ../../components/chat-list/index.pug
-    +chat-container('chat__container_inner')
-        include ../../components/chat-messages/index.pug
-        include ../../components/chat-input/index.pug
+    #{chat_list}
+        +chat-container('chat__container_inner')
+            #{chat_messages}
+            #{chat_input}
+

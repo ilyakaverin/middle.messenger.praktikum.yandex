@@ -1,17 +1,15 @@
 .chatlist_container {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--chatlist-bg-color);
-    box-shadow: 10px 10px black;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--chatlist-bg-color);
+  box-shadow: 10px 10px black;
 }
 .chatlist__users {
-    margin-top: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    & + button {
-        margin-top: auto;
-    }
-
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.chatlist__buttons {
+  margin-top: auto;
 }

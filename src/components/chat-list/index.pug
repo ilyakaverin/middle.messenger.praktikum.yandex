@@ -1,12 +1,12 @@
 include ../chat-list-user/index.pug
-include ../button/index.pug
 
-div(class="chatlist_container")
-    include ../chat-search/index.pug
+div.chatlist_container
+    #{chat_search}
     div.chatlist__users
-        +user('Саша')
-        +user('Петя')
-        +user('Вася')
-    +button('logout', 'purple')
-    +button('Edit profile', 'green')
+         +user('Саша')
+         +user('Петя')
+         +user('Вася')
+    div.chatlist__buttons
+        #{button1} 
+        #{button2}
     
