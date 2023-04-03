@@ -17,10 +17,6 @@ interface FormLoginProps {
   };
 }
 
-type HTMLElementEvent<T extends HTMLElement> = Event & {
-  target: T;
-};
-
 export class FormLogin extends Block<FormLoginProps> {
   constructor(props: FormLoginProps) {
     super({ ...props });
