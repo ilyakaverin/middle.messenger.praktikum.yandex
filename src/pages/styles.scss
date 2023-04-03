@@ -13,12 +13,12 @@
 }
 
 :root {
-  --default-bg-color: #0000ff;
+  --default-bg-color: #00f;
   --default-font-color: #a8a8a8;
   --chatlist-bg-color: #0000a8;
   --chatmessages-bg-color: #00a8a8;
 
-  font-family: "IBM BIOS";
+  font-family: "IBM BIOS", sans-serif;
 }
 
 body {
@@ -33,9 +33,11 @@ body {
   width: 100%;
   height: calc(100vh - 1px);
 }
+
 .visible {
   display: block;
 }
+
 .hidden {
   display: none !important;
 }

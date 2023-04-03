@@ -1,14 +1,8 @@
-import "../layout/container/container.scss";
 import "../components/form-container/form-container.scss";
 import "../components/form-login/form-login.scss";
 import "../components/avatar/avatar.scss";
-import "../components/form-register/form-register.scss";
-import "../components/form-account-edit/account-edit.scss";
-import "../components/form-change-password/change-password.scss";
 import "../components/chat-container/chat-container.scss";
-import "../layout/chat/chat-layout.scss";
 import "../components/chat-messages/chat-messages.scss";
-import "../components/chat-input/chat-input.scss";
 import "../components/chat-list-user/chat-list-user.scss";
 import "../components/chat-list/chat-list.scss";
 import "./styles.scss";

@@ -6,7 +6,6 @@
 
 Чат в ретро стиле с олдскульными шрифтами картинками, основная идея совместить современные технологии со старыми приемами в веб дизайне
 
-
 [netlify link](https://ilyakaverinchat.netlify.app/)
 
 ![picture1](/ui/Screenshot%20from%202023-03-08%2015-01-41.png).
@@ -16,3 +15,9 @@
 ![picture1](/ui/Screenshot%20from%202023-03-08%2015-18-06.png).
 ![picture1](/ui/Screenshot%20from%202023-03-08%2015-21-10.png).
 ![picture1](/ui/Screenshot%20from%202023-03-08%2015-39-30.png).
+
+## sprint_2
+
+- Добавлены классы
+- добавлен http transport
+- Добавлен Nanoid, stylelint, eslint, typescript

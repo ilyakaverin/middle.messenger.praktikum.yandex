@@ -15,7 +15,7 @@ export class ChatSearch extends Block<ChatSearchProps> {
       type: "text",
       placeholder: "Chat search",
       name: "chat_search",
-      className: ["text-input", "chatlist__input"],
+      className: ["text-input", "chatlist-input"],
     });
   }
 
