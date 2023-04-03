@@ -73,4 +73,4 @@ class HTTPTransport {
 
 const HTTPService = new HTTPTransport();
 
-export default HTTPService
+export default HTTPService;

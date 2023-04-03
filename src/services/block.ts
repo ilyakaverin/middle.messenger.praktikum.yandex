@@ -181,6 +181,17 @@ export class Block<P extends Record<string, any> = any> {
     return temp.content;
   }
 
+  private _removeEvents() {
+    const { events } = this.props as Record<string, () => void>;
+
+    if (!events || !this._element) {
+      return;
+    }
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element!.removeEventListener(event, listener);
+    });
+  }
+
   protected render(): DocumentFragment {
     return new DocumentFragment();
   }
