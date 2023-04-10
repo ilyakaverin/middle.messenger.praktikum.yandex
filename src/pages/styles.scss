@@ -1,43 +1,53 @@
-
 @font-face {
-    font-family: 'IBM BIOS';
-    src: url('../../static/fonts/WebPlus_IBM_BIOS.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "IBM BIOS";
+  src: url("../../static/fonts/WebPlus_IBM_BIOS.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --default-bg-color: #0000FF;
-    --default-font-color: #A8A8A8;
-    --chatlist-bg-color: #0000A8;
-    --chatmessages-bg-color: #00a8a8;;
-    
-    font-family: 'IBM BIOS';
+  --default-bg-color: #00f;
+  --default-font-color: #a8a8a8;
+  --chatlist-bg-color: #0000a8;
+  --chatmessages-bg-color: #00a8a8;
+
+  font-family: "IBM BIOS", sans-serif;
 }
 
 body {
-
-    background-color: var(--default-bg-color);
-    color: var(--default-font-color);   
+  background-color: var(--default-bg-color);
+  color: var(--default-font-color);
 }
 
 #root {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: calc(100vh - 1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 1px);
 }
+
 .visible {
-    display: block;
+  display: block;
 }
+
 .hidden {
-    display: none !important;
+  display: none !important;
+}
+
+nav {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 25px;
+
+  a {
+    color: white;
+  }
 }
