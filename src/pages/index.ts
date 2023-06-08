@@ -7,7 +7,6 @@ import "../components/chat-list-user/chat-list-user.scss";
 import "../components/chat-list/chat-list.scss";
 import "./styles.scss";
 import "../components/button/button.scss";
-import "../components/error/error.scss";
 import "../components/chat-channel/chat-channel.scss";
 import "../components/chat-add-user/chat-add-user.scss";
 import "../components/text-input/text-input.scss";
