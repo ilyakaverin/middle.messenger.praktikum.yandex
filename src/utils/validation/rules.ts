@@ -12,8 +12,8 @@ export const minLength = (length: number) => (value: string) =>
 export const maxLength = (length: number) => (value: string) =>
   value && value.length > length ? `maximum length is ${length}` : null;
 
-export const isInvalidString = (regex: RegExp) => (value: string) =>
-  regex.test(value) ? null : `doesn not match with ${regex} pattern`;
+export const isInvalidString = (regex: RegExp, errorText: string) => (value: string) =>
+  regex.test(value) ? null : errorText;
 
 export const isEmptyString = (value: string) => value.trim().length === 0;
 export const combineRules =

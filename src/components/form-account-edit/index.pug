@@ -1,12 +1,13 @@
 include ../../components/form-container/form-container.pug
 
-+fieldset-with-legend('Account edit', 'account_edit', 'hidden')
++fieldset-with-legend('Account edit', 'account_edit')
     form(id="formAccountEdit")
-        #{name}
-        #{surname}
+        #{first_name}
+        #{second_name}
         #{display_name} 
         #{login} 
         #{email} 
         #{phone} 
         #{button1}
         #{button2}
+        #{button3}

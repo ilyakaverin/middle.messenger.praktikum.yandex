@@ -6,55 +6,37 @@ import "../components/chat-messages/chat-messages.scss";
 import "../components/chat-list-user/chat-list-user.scss";
 import "../components/chat-list/chat-list.scss";
 import "./styles.scss";
-import { App } from "../layout/container/container";
+import "../components/button/button.scss";
+import "../components/error/error.scss";
+import "../components/chat-channel/chat-channel.scss";
+import "../components/chat-add-user/chat-add-user.scss";
+import "../components/text-input/text-input.scss";
+import "../components/message/message.scss";
+import router from "../services/router";
+import { FormLogin } from "../components/form-login/form-login";
+import { FormRegister } from "../components/form-register/form-register";
+import { Chat } from "../layout/chat/chat";
+import { FormAccountEdit } from "../components/form-account-edit/account-edit";
+import { FormChangePassword } from "../components/form-change-password/change-password";
+import { routes } from "../interfaces/enums";
+import { NewChat } from "../components/new-chat/new-chat";
 
-const root = document.getElementById("root");
+router
+  .use(routes.login, FormLogin)
+  .use(routes.register, FormRegister)
+  .use(routes.chat, Chat)
+  .use(routes.edit, FormAccountEdit)
+  .use(routes.changePassword, FormChangePassword)
+  .use(routes.newChat, NewChat)
+  .start();
 
-const app = new App({});
+Notification.requestPermission().then((permission) => {
+  if (permission === "granted") {
+    const permissionRequestBanner = document.getElementById(
+      "notificationRequest"
+    );
 
-root?.append(app.getContent()!);
-
-const buttons = document.querySelectorAll("button");
-
-const buttonCreate = (buttonText: string) =>
-  Array.from(buttons).find((button) => button.innerText === buttonText);
-
-const router = (
-  button: HTMLButtonElement | undefined,
-  from: HTMLElement | null,
-  to: HTMLElement | null
-) => {
-  button!.addEventListener("click", (e) => {
-    e.preventDefault();
-    from!.classList.add("hidden");
-    to!.classList.remove("hidden");
-  });
-};
-
-const enter = buttonCreate("Enter");
-const logout = buttonCreate("logout");
-const registerButton = buttonCreate("Register");
-const createProfile = buttonCreate("Create profile");
-const editProfile = buttonCreate("Edit profile");
-const changePasswordButton = buttonCreate("Change password");
-const backToLogin = buttonCreate("Back to login");
-const saveAndExit = buttonCreate("Save and exit");
-const backToEdit = buttonCreate("Back to edit");
-const accountEditSave = buttonCreate("Save");
-
-const login = document.getElementById("login");
-const register = document.getElementById("register");
-const changePassword = document.getElementById("change_password");
-const accountEdit = document.getElementById("account_edit");
-const chat = document.getElementById("chat_container");
-
-router(enter, login, chat);
-router(logout, chat, login);
-router(registerButton, login, register);
-router(editProfile, chat, accountEdit);
-router(changePasswordButton, accountEdit, changePassword);
-router(backToLogin, register, login);
-router(createProfile, register, chat);
-router(saveAndExit, changePassword, accountEdit);
-router(backToEdit, changePassword, accountEdit);
-router(accountEditSave, accountEdit, chat);
+    permissionRequestBanner?.remove();
+    // …
+  }
+});

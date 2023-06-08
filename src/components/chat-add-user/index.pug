@@ -1,0 +1,7 @@
+.chat-add-user
+    #{inputLogin}
+    #{addUser}
+    #{closeButton}
+    div.users-container
+        each item in users ? users : []
+            =item.login

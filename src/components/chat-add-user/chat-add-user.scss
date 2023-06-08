@@ -1,0 +1,13 @@
+.chat-add-user {
+    position: absolute;
+    background-color: var(--default-font-color);
+    z-index: 9999;
+    padding: 15px;
+    border-radius: 5px;
+    left: 50%;
+}
+
+.users-container {
+    color:var(--warning-font-color);
+    margin-top: 15px;
+}
