@@ -1,14 +1,17 @@
+import { ChatAddUser } from "../../components/chat-add-user/chat-add-user";
 import { ChatInput } from "../../components/chat-input/chat-input";
 import { ChatList } from "../../components/chat-list/chat-list";
 import { ChatMessages } from "../../components/chat-messages/chat-messages";
+import { ChatUsers } from "../../components/chat-users/chat-users";
 import { StoreEvents, ConnectStatus, routes } from "../../interfaces/enums";
 import { Block } from "../../services/block";
 import router from "../../services/router";
 import { getUser } from "../../sources/auth";
-import { connectToChat, getChats } from "../../sources/chat";
+import { connectToChat, getChatUsers, getChats } from "../../sources/chat";
 import { isLogged } from "../../sources/constants";
 import { setupSocket } from "../../sources/socket";
 import store from "../../store";
+import { isEqual } from "../../utils";
 import template from "./index.pug";
 
 export class Chat extends Block {
@@ -36,6 +39,10 @@ export class Chat extends Block {
     this.children.chat_messages = new ChatMessages({});
     this.children.chat_input = new ChatInput({ socket: {} });
     this.children.chat_list = new ChatList({ chats: [] });
+    this.children.usersSearch = new ChatAddUser({
+      chatId: null,
+    });
+    this.children.users = [];
 
     store.on(StoreEvents.Updated, async () => {
       const state = store.getState();
@@ -72,6 +79,9 @@ export class Chat extends Block {
           state.socket.addEventListener("open", () => {
             new Notification("подключился к чату!");
             store.set("status", ConnectStatus.CONNECTED);
+            this.setChildren({
+              users: [new ChatUsers({ chatId: this.props.currentChat })],
+            });
 
             socket.send(
               JSON.stringify({
@@ -86,7 +96,7 @@ export class Chat extends Block {
                   type: "ping",
                 })
               );
-            }, 20000);
+            }, 10000);
           });
 
           socket.onmessage = (event) => {
@@ -99,6 +109,7 @@ export class Chat extends Block {
 
           socket.addEventListener("close", (event) => {
             clearInterval(this.pingWS);
+            this.setChildren({ users: [] });
             if (event.wasClean) {
               new Notification("Соединение закрыто чисто");
             } else {

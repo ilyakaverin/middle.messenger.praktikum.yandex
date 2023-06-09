@@ -6,7 +6,7 @@ import { logout } from "../../sources/auth";
 import { StoreEvents, routes } from "../../interfaces/enums";
 import { ChatChannel } from "../chat-channel/chat-channel";
 import store from "../../store";
-import { isEqual } from "../../utils";
+import { cutStringIfLong, isEqual } from "../../utils";
 
 interface ChatListProps {
   chats: ChatChannel[];
@@ -32,7 +32,11 @@ export class ChatList extends Block<ChatListProps> {
         if (Array.isArray(this.props.chats)) {
           const components = this.props?.chats.map(
             (chat) =>
-              new ChatChannel({ chatLabel: chat.title, id: chat.id, userId })
+              new ChatChannel({
+                chatLabel: cutStringIfLong(chat.title, 9),
+                id: chat.id,
+                userId,
+              })
           );
 
           this.setChildren({ list: components });

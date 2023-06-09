@@ -46,6 +46,10 @@ export const collectData = (formId: string) => {
 };
 
 export const isEqual = (lhs: PlainObject | string, rhs: PlainObject) => {
+  if (!lhs || !rhs) {
+    return false;
+  }
+
   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false;
   }
@@ -181,4 +185,18 @@ export const throttle = (func: Function, delay: number) => {
       func.apply(context, args);
     }
   };
+};
+
+export const collectCheckboxValues = (name: string, formName: string) => {
+  const form = document.getElementById(formName);
+  const checkboxes = form.querySelectorAll(`input[name="${name}"]:checked`);
+
+  return Array.from(checkboxes).map((checkbox) => checkbox.value);
+};
+
+export const cutStringIfLong = (str: string, maxLength: number): string => {
+  if (str.length > maxLength) {
+    return str.slice(0, maxLength) + "...";
+  }
+  return str;
 };

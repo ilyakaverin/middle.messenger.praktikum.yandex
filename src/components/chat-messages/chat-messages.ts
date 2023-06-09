@@ -4,6 +4,7 @@ import store from "../../store";
 import { formatDate } from "../../utils";
 import { Button } from "../button/button";
 import { ChatAddUser } from "../chat-add-user/chat-add-user";
+import { ChatUsers } from "../chat-users/chat-users";
 import { Message } from "../message/message";
 import template from "./index.pug";
 
@@ -38,26 +39,9 @@ export class ChatMessages extends Block<ChatMessagesProps> {
           );
         this.setChildren({
           messages: components,
-          chatControls: [
-            new Button({
-              label: " ",
-              classNames: ["button", "green", "button-with-svg", "add-user"],
-              events: {
-                click: () => {
-                  const addUser = [new ChatAddUser({ label: "add user" })];
-
-                  this.setChildren({ addUser });
-                },
-              },
-            }),
-            new Button({
-              label: " ",
-              classNames: ["button", "purple", "button-with-svg", "add-user"],
-            }),
-          ],
         });
       } else {
-        this.setChildren({ messages: [], chatControls: [] });
+        this.setChildren({ messages: [] });
       }
     });
   }

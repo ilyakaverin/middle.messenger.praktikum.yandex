@@ -1,5 +1,6 @@
 import { ConnectStatus, StoreEvents } from "../../interfaces/enums";
 import { Block } from "../../services/block";
+import { deleteChat, getChats } from "../../sources/chat";
 import store from "../../store";
 import { Button } from "../button/button";
 import template from "./index.pug";
@@ -26,6 +27,8 @@ export class ChatChannel extends Block {
         store.remove("token"),
         store.removeMessages(),
         store.remove("socket"),
+        store.remove("searchResult"),
+        store.remove("chatUsers"),
       ]);
       store.set("status", ConnectStatus.DISCONNECTED);
       store.remove("currentChat");
@@ -41,6 +44,27 @@ export class ChatChannel extends Block {
         click: () => {
           store.set("currentChat", this.props.id);
           store.set("status", ConnectStatus.CONNECTING);
+        },
+      },
+    });
+    this.children.deleteChat = new Button({
+      label: "Delete",
+      disabled: false,
+      classNames: ["button", "purple", "button-small"],
+      events: {
+        click: async () => {
+          const request = { chatId: this.props.id };
+          this.loader(this.children.deleteChat as Button, "Deleting", true);
+
+          try {
+            await deleteChat(request);
+            const response = await getChats();
+            this.loader(this.children.deleteChat as Button, "Delete", false);
+            store.set("chats", response.message);
+          } catch (e) {
+            new Notification(e);
+            this.loader(this.children.deleteChat as Button, "Delete", false);
+          }
         },
       },
     });
@@ -64,12 +88,18 @@ export class ChatChannel extends Block {
             click: this.clickEvents[status],
           },
         });
+        this.children.deleteChat.setProps({ disabled: true });
       } else if (statusesForDisabling.includes(status)) {
         this.children.connect.setProps({ disabled: true });
       } else {
         this.children.connect.setProps({ disabled: false });
+        this.children.deleteChat.setProps({ disabled: false });
       }
     });
+  }
+
+  loader(button: Button, text: string, disabled: boolean) {
+    button.setProps({ label: text, disabled });
   }
 
   render() {

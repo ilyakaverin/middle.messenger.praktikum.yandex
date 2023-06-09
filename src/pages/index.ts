@@ -5,6 +5,8 @@ import "../components/chat-container/chat-container.scss";
 import "../components/chat-messages/chat-messages.scss";
 import "../components/chat-list-user/chat-list-user.scss";
 import "../components/chat-list/chat-list.scss";
+import "../components/chat-users/chat-users.scss";
+import "../components/chat-user/chat-user.scss";
 import "./styles.scss";
 import "../components/button/button.scss";
 import "../components/chat-channel/chat-channel.scss";

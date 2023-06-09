@@ -2,8 +2,6 @@ import { Indexed } from "../interfaces/components";
 import { ConnectStatus, StoreEvents } from "../interfaces/enums";
 import { EventBus } from "../services/event-bus";
 import { set } from "../utils";
-
-// наследуем Store от EventBus, чтобы его методы были сразу доступны у экземпляра Store
 class Store extends EventBus {
   private state: Indexed = {
     status: ConnectStatus.DISCONNECTED,
@@ -16,7 +14,6 @@ class Store extends EventBus {
   public getMessages() {
     return this.messages;
   }
-
   public set(path: string, value: unknown): void {
     set(this.state, path, value);
 

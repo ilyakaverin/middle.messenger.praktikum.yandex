@@ -23,10 +23,23 @@ export const connectToChat = (id: number) =>
   );
 
 export const addUser = (parameters: unknown) =>
-  HTTPService.put(
-    `${BASE_URL}/chats/users`,
-    getBaseParameters(parameters)
-  ).then((response: XMLHttpRequest) => ({
-    message: JSON.parse(response.responseText),
-    code: response.status,
-  }));
+  HTTPService.put(`${BASE_URL}/chats/users`, getBaseParameters(parameters));
+
+export const getChatUsers = (id: number) =>
+  HTTPService.get(`${BASE_URL}/chats/${id}/users`).then(
+    (response: XMLHttpRequest) => ({
+      message: JSON.parse(response.responseText),
+      code: response.status,
+    })
+  );
+
+export const deleteChat = (id: { chatId: string }) =>
+  HTTPService.delete(`${BASE_URL}/chats`, getBaseParameters(id)).then(
+    (response: XMLHttpRequest) => ({
+      message: JSON.parse(response.responseText),
+      code: response.status,
+    })
+  );
+
+export const deleteUserFromChat = (parameters: unknown) =>
+  HTTPService.delete(`${BASE_URL}/chats/users`, getBaseParameters(parameters));

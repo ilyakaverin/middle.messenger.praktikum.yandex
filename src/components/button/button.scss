@@ -22,7 +22,7 @@
 
 .button-small {
   font-size: 10px;
-  width: 150px;
+  padding: 5px !important
 }
 
 .button-with-svg {
@@ -35,6 +35,7 @@
 .chat-controls {
   margin-left: auto;
   position: relative;
+  display: flex;
 }
 
 .add-user {
