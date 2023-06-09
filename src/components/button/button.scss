@@ -25,22 +25,22 @@
   width: 150px;
 }
 
-.buttonWithSvg {
+.button-with-svg {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
   margin-left: auto;
 }
+
 .chat-controls {
   margin-left: auto;
   position: relative;
 }
 
-.addUser {
-  background-image: url('../../../static/img/plus-user.svg');
-
+.add-user {
+  background-image: url("../../../static/img/plus-user.svg");
 }
 
-.deleteUser {
-  background-image: url('../../../static/img/minus-user.svg');
+.delete-user {
+  background-image: url("../../../static/img/minus-user.svg");
 }

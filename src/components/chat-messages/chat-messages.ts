@@ -41,7 +41,7 @@ export class ChatMessages extends Block<ChatMessagesProps> {
           chatControls: [
             new Button({
               label: " ",
-              classNames: ["button", "green", "buttonWithSvg", "addUser"],
+              classNames: ["button", "green", "button-with-svg", "add-user"],
               events: {
                 click: () => {
                   const addUser = [new ChatAddUser({ label: "add user" })];
@@ -52,7 +52,7 @@ export class ChatMessages extends Block<ChatMessagesProps> {
             }),
             new Button({
               label: " ",
-              classNames: ["button", "purple", "buttonWithSvg", "deleteUser"],
+              classNames: ["button", "purple", "button-with-svg", "add-user"],
             }),
           ],
         });

@@ -13,6 +13,7 @@ import {
 import router from "../../services/router";
 import { signup } from "../../sources/auth";
 import { routes } from "../../interfaces/enums";
+import { isLogged } from "../../sources/constants";
 
 interface FormRegisterProps {
   type?: string;
@@ -31,6 +32,10 @@ export class FormRegister extends Block<FormRegisterProps> {
   }
 
   init() {
+    if (isLogged()) {
+      setTimeout(() => router.go(routes.login), 150);
+    }
+
     this.children.button1 = new Button({
       label: "Create profile",
       classNames: ["button", "green"],

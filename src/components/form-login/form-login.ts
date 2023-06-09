@@ -20,10 +20,14 @@ interface FormLoginProps {
 export class FormLogin extends Block<FormLoginProps> {
   constructor(props: FormLoginProps) {
     super({ ...props });
-    if (isLogged()) router.back();
   }
 
   init() {
+
+    if (isLogged()) {
+      setTimeout(() => router.go(routes.login), 150);
+    }
+
     this.children.buttonLogin = new Button({
       type: "submit",
       label: "Enter",
@@ -37,16 +41,21 @@ export class FormLogin extends Block<FormLoginProps> {
 
           try {
             this.loader(this.children.buttonLogin as Button, "loading", true);
-            const response = (await signin(formData)) as XMLHttpRequest;
+            const response = await signin(formData);
 
             if (response.status !== 200) {
-              throw new Error("wrong login or password");
+              throw new Error(JSON.parse(response.responseText).reason);
             }
             this.loader(this.children.buttonLogin as Button, "Enter", false);
             localStorage.setItem("logged", "true");
             router.go(routes.chat);
           } catch (e) {
             this.loader(this.children.buttonLogin as Button, "Enter", false);
+
+            if (e.message === "User already in system") {
+              localStorage.setItem("logged", "true");
+              router.go("/messenger");
+            }
             new Notification(e);
           }
         },

@@ -12,13 +12,15 @@ import { isLogged } from "../../sources/constants";
 export class NewChat extends Block<any> {
   constructor(props) {
     super({ ...props });
-
-    if (!isLogged()) router.back();
   }
 
   private errors: any = {};
 
   init() {
+    if (!isLogged()) {
+        setTimeout(() => router.go(routes.login), 150);
+    }
+
     this.children.createChat = new Button({
       label: "Create chat",
       classNames: ["button", "green"],

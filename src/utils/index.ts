@@ -45,7 +45,7 @@ export const collectData = (formId: string) => {
   return result;
 };
 
-export const isEqual = (lhs: PlainObject, rhs: PlainObject) => {
+export const isEqual = (lhs: PlainObject | string, rhs: PlainObject) => {
   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false;
   }
@@ -67,7 +67,7 @@ export const isEqual = (lhs: PlainObject, rhs: PlainObject) => {
   return true;
 };
 
-const merge = (lhs, rhs) => {
+const merge = (lhs: PlainObject<any>, rhs: PlainObject<any>) => {
   for (const p in rhs) {
     if (!rhs.hasOwnProperty(p)) {
       continue;

@@ -14,8 +14,14 @@ import template from "./index.pug";
 export class Chat extends Block {
   constructor(props: any) {
     super({ ...props });
+  }
 
-    if (!isLogged()) router.back();
+  private pingWS: number;
+
+  init() {
+    if (!isLogged()) {
+      setTimeout(() => router.go(routes.login), 150);
+    }
 
     getChats()
       .then((data) => {
@@ -26,11 +32,7 @@ export class Chat extends Block {
           store.set("userId", data.id);
         });
       });
-  }
 
-  private pingWS: number;
-
-  init() {
     this.children.chat_messages = new ChatMessages({});
     this.children.chat_input = new ChatInput({ socket: {} });
     this.children.chat_list = new ChatList({ chats: [] });

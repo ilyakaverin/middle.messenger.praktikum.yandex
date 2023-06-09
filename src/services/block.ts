@@ -27,7 +27,7 @@ export class Block<P extends Record<string, any> = any> {
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
-    this.children = this._makeChildrenProxy(children);
+    this.children = this._makeChildrenProxy(children as any);
 
     this.props = this._makePropsProxy(props);
 

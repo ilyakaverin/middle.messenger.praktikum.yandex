@@ -29,12 +29,16 @@ interface FormAccountEditProps {
 export class FormAccountEdit extends Block<FormAccountEditProps> {
   constructor(props: FormAccountEditProps) {
     super({ ...props });
-    if (!isLogged()) router.back();
   }
 
   private errors: any = {};
 
   init() {
+    
+    if (!isLogged()) {
+      setTimeout(() => router.go(routes.login), 150);
+    }
+
     this.children.button1 = new Button({
       label: "Save",
       classNames: ["button", "green"],

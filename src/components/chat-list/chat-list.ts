@@ -29,12 +29,14 @@ export class ChatList extends Block<ChatListProps> {
       } else {
         this.setProps({ chats });
 
-        const components = this.props?.chats.map(
-          (chat) =>
-            new ChatChannel({ chatLabel: chat.title, id: chat.id, userId })
-        );
+        if (Array.isArray(this.props.chats)) {
+          const components = this.props?.chats.map(
+            (chat) =>
+              new ChatChannel({ chatLabel: chat.title, id: chat.id, userId })
+          );
 
-        this.setChildren({ list: components });
+          this.setChildren({ list: components });
+        }
       }
     });
   }
