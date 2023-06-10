@@ -108,8 +108,8 @@ export class Chat extends Block {
             const message = JSON.parse(event.data);
 
             if(Array.isArray(message)) {
-              console.log(message)
-              message.forEach(msg => store.updateMessages(msg))
+              const reversed = message.reverse()
+              reversed.forEach(msg => store.updateMessages(msg))
             }
 
             if (message.type === "message") {
