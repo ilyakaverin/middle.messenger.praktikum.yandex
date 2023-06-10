@@ -7,11 +7,10 @@ import { StoreEvents, ConnectStatus, routes } from "../../interfaces/enums";
 import { Block } from "../../services/block";
 import router from "../../services/router";
 import { getUser } from "../../sources/auth";
-import { connectToChat, getChatUsers, getChats } from "../../sources/chat";
+import { connectToChat, getChats } from "../../sources/chat";
 import { isLogged } from "../../sources/constants";
 import { setupSocket } from "../../sources/socket";
 import store from "../../store";
-import { isEqual } from "../../utils";
 import template from "./index.pug";
 
 export class Chat extends Block {
@@ -46,7 +45,6 @@ export class Chat extends Block {
 
     store.on(StoreEvents.Updated, async () => {
       const state = store.getState();
-
       if (state.status === ConnectStatus.DISCONNECTING && state.socket) {
         state.socket.close();
       }

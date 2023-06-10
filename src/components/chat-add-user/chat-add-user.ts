@@ -1,12 +1,10 @@
 import { ConnectStatus, StoreEvents } from "../../interfaces/enums";
 import { Block } from "../../services/block";
 import { addUser, getChatUsers } from "../../sources/chat";
-import { userSearch } from "../../sources/user";
 import store from "../../store";
-import { collectCheckboxValues, debounce } from "../../utils";
+import { collectCheckboxValues, } from "../../utils";
 import { Button } from "../button/button";
-import { ChatSearch, SearchUsers } from "../chat-search/chat-search";
-import { Input } from "../text-input";
+import { SearchUsers } from "../chat-search/chat-search";
 import template from "./index.pug";
 
 interface IChatAdduserProps {
