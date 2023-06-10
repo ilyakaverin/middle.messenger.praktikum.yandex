@@ -90,6 +90,11 @@ export class Chat extends Block {
               })
             );
 
+            socket.send(JSON.stringify({
+              content: '0',
+              type: 'get old',
+            })); 
+
             this.pingWS = setInterval(() => {
               socket.send(
                 JSON.stringify({
@@ -102,7 +107,14 @@ export class Chat extends Block {
           socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
 
+            if(Array.isArray(message)) {
+              console.log(message)
+              message.forEach(msg => store.updateMessages(msg))
+            }
+
             if (message.type === "message") {
+
+              
               store.updateMessages(message);
             }
           };
