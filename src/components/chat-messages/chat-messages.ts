@@ -2,9 +2,6 @@ import { StoreEvents } from "../../interfaces/enums";
 import { Block } from "../../services/block";
 import store from "../../store";
 import { formatDate } from "../../utils";
-import { Button } from "../button/button";
-import { ChatAddUser } from "../chat-add-user/chat-add-user";
-import { ChatUsers } from "../chat-users/chat-users";
 import { Message } from "../message/message";
 import template from "./index.pug";
 
@@ -39,7 +36,7 @@ export class ChatMessages extends Block<ChatMessagesProps> {
           );
         this.setChildren({
           messages: components,
-        });
+        })
       } else {
         this.setChildren({ messages: [] });
       }
