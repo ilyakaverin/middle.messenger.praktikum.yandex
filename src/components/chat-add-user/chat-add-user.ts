@@ -38,7 +38,7 @@ export class ChatAddUser extends Block {
       classNames: ["button", "green"],
       events: {
         click: async () => {
-          const data = collectCheckboxValues("user", "formAddUsers");
+          const data = collectCheckboxValues("user", "form-add-users");
 
           if (data.length === 0) {
             new Notification("please pick user");
