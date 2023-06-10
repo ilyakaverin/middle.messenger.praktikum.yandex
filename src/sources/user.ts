@@ -1,5 +1,9 @@
 import HTTPService from "../services/http-transport";
-import { BASE_URL, getBaseParameters } from "./constants";
+import {
+  BASE_URL,
+  getAvatarRequestParameters,
+  getBaseParameters,
+} from "./constants";
 
 export const changeProfile = (parameters: unknown) =>
   HTTPService.put(
@@ -17,6 +21,15 @@ export const userSearch = (parameters: unknown) =>
   HTTPService.post(
     `${BASE_URL}/user/search`,
     getBaseParameters(parameters)
+  ).then((response: XMLHttpRequest) => ({
+    message: JSON.parse(response.responseText),
+    code: response.status,
+  }));
+
+export const setUserAvatar = (parameters: FormData) =>
+  HTTPService.put(
+    `${BASE_URL}/user/profile/avatar`,
+    getAvatarRequestParameters(parameters)
   ).then((response: XMLHttpRequest) => ({
     message: JSON.parse(response.responseText),
     code: response.status,

@@ -5,6 +5,6 @@ include ../../components/chat-container/index.pug
         +chat-container('chat-container_inner')
             #{chat_messages}
             #{chat_input}
-    #{usersSearch}
     each user in users ? users : []
         #{user}
+    #{usersSearch}

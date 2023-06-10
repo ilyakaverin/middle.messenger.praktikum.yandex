@@ -8,6 +8,12 @@ export const getBaseParameters = (parameters: unknown) => ({
   },
 });
 
+export const getAvatarRequestParameters = (parameters: FormData) => ({
+  data: parameters,
+  mode: "cors",
+  headers: {},
+});
+
 export const editScheme = [
   "first_name",
   "second_name",
@@ -15,6 +21,7 @@ export const editScheme = [
   "login",
   "email",
   "phone",
+  "avatar",
 ];
 
 export const isLogged = () => localStorage.getItem("logged");

@@ -1,1 +1,10 @@
-div.avatar
+if src
+    div.avatar
+        img(src=`https://ya-praktikum.tech/api/v2/resources${src}`)
+        form(id="formAvatarChange")
+            #{input}
+else
+    form(id="formAvatar")
+        #{input}
+
+

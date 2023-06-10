@@ -12,10 +12,12 @@ import {
   phoneValidationScheme,
 } from "../../utils/validation";
 import router from "../../services/router";
-import { routes } from "../../interfaces/enums";
+import { StoreEvents, routes } from "../../interfaces/enums";
 import { changeProfile } from "../../sources/user";
 import { getUser } from "../../sources/auth";
 import { editScheme, isLogged } from "../../sources/constants";
+import { Avatar } from "../avatar/avatar";
+import store from "../../store";
 
 interface FormAccountEditProps {
   type?: string;
@@ -29,12 +31,25 @@ interface FormAccountEditProps {
 export class FormAccountEdit extends Block<FormAccountEditProps> {
   constructor(props: FormAccountEditProps) {
     super({ ...props });
+
+    store.on(StoreEvents.Updated, () => {
+      const { userData } = store.getState();
+
+      if (userData) {
+        editScheme.forEach((key) => {
+          if (key === "avatar") {
+            this.children.avatar.setProps({ src: userData[key] });
+          } else {
+            this.children[key].setValue(userData[key]);
+          }
+        });
+      }
+    });
   }
 
   private errors: any = {};
 
   init() {
-    
     if (!isLogged()) {
       setTimeout(() => router.go(routes.login), 150);
     }
@@ -207,8 +222,6 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
           const inputEl = e.target as HTMLInputElement;
           this.errors.display_name = displayNameValidationScheme(inputEl.value);
 
-          console.log(this.errors);
-
           if (this.errors.display_name && this.errors.display_name.length > 0) {
             new Notification(this.errors.display_name);
           }
@@ -219,10 +232,10 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
       },
     });
 
+    this.children.avatar = new Avatar({});
+
     getUser().then((data: XMLHttpRequest) => {
-      editScheme.forEach((key) => {
-        this.children[key].setValue(data[key]);
-      });
+      store.set("userData", data);
     });
   }
 
