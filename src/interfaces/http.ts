@@ -10,3 +10,7 @@ export interface IRequestOptions {
   headers?: Record<string, string>;
   data?: XMLHttpRequestBodyInit;
 }
+export type HTTPMethod = (
+  url: string,
+  options?: IRequestOptions
+) => Promise<unknown>;

@@ -24,10 +24,8 @@ export class ChatInput extends Block<ChatInputProps> {
 
       if (status === ConnectStatus.CONNECTED) {
         this.children.input.setProps({ disabled: false });
-        this.children.button.setProps({ disabled: false });
       } else {
         this.children.input.setProps({ disabled: true });
-        this.children.button.setProps({ disabled: true });
       }
     });
   }
