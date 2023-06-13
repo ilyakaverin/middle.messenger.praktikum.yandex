@@ -1,3 +1,4 @@
+import { isEqual } from "../utils";
 import { EventBus } from "./event-bus";
 import { nanoid } from "nanoid";
 
@@ -11,7 +12,7 @@ export class Block<P extends Record<string, any> = any> {
 
   public id = nanoid(6);
   protected props: P;
-  public children: Record<string, Block | Block[]>;
+  protected children: Record<string, Block | Block[]>;
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
 
@@ -26,7 +27,8 @@ export class Block<P extends Record<string, any> = any> {
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
-    this.children = children;
+    this.children = this._makeChildrenProxy(children as any);
+
     this.props = this._makePropsProxy(props);
 
     this.eventBus = () => eventBus;
@@ -49,9 +51,9 @@ export class Block<P extends Record<string, any> = any> {
         value.length > 0 &&
         value.every((v) => v instanceof Block)
       ) {
-        children[key as string] = value;
+        children[key] = value;
       } else if (value instanceof Block) {
-        children[key as string] = value;
+        children[key] = value;
       } else {
         props[key] = value;
       }
@@ -104,13 +106,12 @@ export class Block<P extends Record<string, any> = any> {
   }
 
   private _componentDidUpdate(oldProps: P, newProps: P) {
-    if (this.componentDidUpdate(oldProps, newProps)) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    }
+    if (this.componentDidUpdate(oldProps, newProps)) return;
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
   protected componentDidUpdate(oldProps: P, newProps: P) {
-    return true;
+    return isEqual(oldProps, newProps);
   }
 
   setProps = (nextProps: Partial<P>) => {
@@ -121,12 +122,21 @@ export class Block<P extends Record<string, any> = any> {
     Object.assign(this.props, nextProps);
   };
 
+  setChildren = (nextProps: Partial<P>) => {
+    if (!nextProps) {
+      return;
+    }
+
+    Object.assign(this.children, nextProps);
+  };
+
   get element() {
     return this._element;
   }
 
   private _render() {
     const fragment = this.render();
+    this._removeEvents();
 
     const newElement = fragment.firstElementChild as HTMLElement;
 
@@ -145,7 +155,7 @@ export class Block<P extends Record<string, any> = any> {
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
         contextAndStubs[name] = component.map(
-          (child) => `<div data-id="${child.id}"></div>`
+          (child) => `div data-id="${child.id}"</div`
         );
       } else {
         contextAndStubs[name] = `span data-id="${component.id}"></span`;
@@ -181,6 +191,14 @@ export class Block<P extends Record<string, any> = any> {
     return temp.content;
   }
 
+  protected render(): DocumentFragment {
+    return new DocumentFragment();
+  }
+
+  getContent() {
+    return this.element;
+  }
+
   private _removeEvents() {
     const { events } = this.props as Record<string, () => void>;
 
@@ -190,14 +208,6 @@ export class Block<P extends Record<string, any> = any> {
     Object.entries(events).forEach(([event, listener]) => {
       this._element!.removeEventListener(event, listener);
     });
-  }
-
-  protected render(): DocumentFragment {
-    return new DocumentFragment();
-  }
-
-  getContent() {
-    return this.element;
   }
 
   _makePropsProxy(props: P) {
@@ -213,9 +223,31 @@ export class Block<P extends Record<string, any> = any> {
 
         target[prop as keyof P] = value;
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+
+        return true;
+      },
+      deleteProperty() {
+        throw new Error("Нет доступа");
+      },
+    });
+  }
+
+  _makeChildrenProxy(props: P) {
+    const self = this;
+
+    return new Proxy(props, {
+      get(target, prop: string) {
+        const value = target[prop];
+        return typeof value === "function" ? value.bind(target) : value;
+      },
+      set(target, prop: string, value) {
+        const oldTarget = { ...target };
+
+        target[prop as keyof P] = value;
+
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+
         return true;
       },
       deleteProperty() {

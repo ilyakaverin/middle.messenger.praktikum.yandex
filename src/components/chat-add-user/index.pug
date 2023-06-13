@@ -1,0 +1,8 @@
+.chat-add-user
+    #{input}
+    div.users-container
+        form(id='form-add-users')
+            each item in users ? users : []
+                label=item.login
+                    input(type='checkbox', name='user', value=item.id)
+        #{addUser}

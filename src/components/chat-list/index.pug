@@ -1,12 +1,12 @@
-include ../chat-list-user/index.pug
-
 div.chatlist-container
-    #{chat_search}
-    div.chatlist-users
-         +user('Саша')
-         +user('Петя')
-         +user('Вася')
+    h4 Chat rooms
+    div.chatlist-channels
+        each item in list ? list : []
+            #{item}
     div.chatlist-buttons
-        #{button1} 
+        #{button3}
         #{button2}
+        #{button1} 
+    
+
     

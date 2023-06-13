@@ -1,1 +1,4 @@
 div.chatmessages-container
+    div.chatmessages-messages
+        each item in messages ? messages : []
+            #{item}

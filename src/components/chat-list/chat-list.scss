@@ -3,9 +3,14 @@
   flex-direction: column;
   background-color: var(--chatlist-bg-color);
   box-shadow: 10px 10px black;
+  min-width: 370px;
+  
+  span, h4 {
+    margin: 10px;
+  }
 }
 
-.chatlist-users {
+.chatlist-channels {
   margin-top: 25px;
   display: flex;
   flex-direction: column;

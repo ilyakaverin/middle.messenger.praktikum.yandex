@@ -1,4 +1,27 @@
 .chatmessages-container {
   background-color: var(--chatmessages-bg-color);
   height: 400px;
+  padding: 25px;
+  padding-right: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chatcontrols-container {
+  display: flex;
+  align-items: flex-start;
+  margin-right: 15px;
+  gap: 10px;
+  flex-direction: column;
+  
+  button {
+    box-shadow: unset;
+  }
+}
+
+.chatmessages-messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  width: 100%;
 }

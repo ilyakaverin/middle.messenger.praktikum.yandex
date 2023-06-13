@@ -1,7 +1,10 @@
 .avatar {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 2px solid black;
-  background-color: antiquewhite;
+  width: 75px;
+  height: 75px;
+  align-self: center;
+  margin-bottom: 55px;
+
+  img {
+    max-width: 100%;
+  }
 }

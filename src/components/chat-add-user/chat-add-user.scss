@@ -1,0 +1,24 @@
+.chat-add-user {
+    background-color: var(--default-font-color);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px #000;
+}
+
+.users-container {
+    color:var(--warning-font-color);
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 15px
+}
+
+#form-add-users label {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+    font-size: 10px;
+}

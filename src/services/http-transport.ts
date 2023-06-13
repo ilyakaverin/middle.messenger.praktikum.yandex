@@ -44,10 +44,13 @@ class HTTPTransport {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
+      xhr.withCredentials = true;
+
       xhr.open(
         method as REQUEST_TYPE,
         method === REQUEST_TYPE.GET && !!data ? url + queryStringify(data) : url
       );
+
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);

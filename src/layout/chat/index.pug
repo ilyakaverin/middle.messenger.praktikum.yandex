@@ -1,7 +1,11 @@
 include ../../components/chat-container/index.pug
 
-+chat-container('chat-container hidden', 'chat_container')
++chat-container('chat-container', 'chat_container')
     #{chat_list}
         +chat-container('chat-container_inner')
             #{chat_messages}
             #{chat_input}
+    div.chat-users-container
+        each user in users ? users : []
+             #{user}
+        #{usersSearch}
