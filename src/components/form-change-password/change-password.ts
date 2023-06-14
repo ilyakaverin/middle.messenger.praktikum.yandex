@@ -9,12 +9,16 @@ import {
   confirmValidationScheme,
   passwordValidationScheme,
 } from "../../utils/validation";
-import { FormLoginProps } from "../../interfaces/components";
 import { changePassword } from "../../sources/user";
 import { isLogged } from "../../sources/constants";
+import cn from "../../utils/classnames";
 
-export class FormChangePassword extends Block<FormLoginProps> {
-  constructor(props: FormLoginProps) {
+interface IFormChangePassword  {
+  [key: string]: unknown
+}
+
+export class FormChangePassword extends Block {
+  constructor(props: IFormChangePassword ) {
     super({ ...props });
   }
 
@@ -28,7 +32,7 @@ export class FormChangePassword extends Block<FormLoginProps> {
     
     this.children.button1 = new Button({
       label: "Save and exit",
-      classNames: ["button", "green"],
+      classNames: cn(["button", "green"]),
       disabled: true,
       events: {
         click: async (e) => {
@@ -65,7 +69,7 @@ export class FormChangePassword extends Block<FormLoginProps> {
     });
     this.children.button2 = new Button({
       label: "Back to edit",
-      classNames: ["button", "purple"],
+      classNames: cn(["button", "purple"]),
       events: {
         click: () => {
           router.go(routes.edit);
@@ -74,7 +78,7 @@ export class FormChangePassword extends Block<FormLoginProps> {
     });
     this.children.old_password = new Input({
       type: "password",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Old password",
       name: "old_password",
       events: {
@@ -85,7 +89,7 @@ export class FormChangePassword extends Block<FormLoginProps> {
     });
     this.children.new_password = new Input({
       type: "password",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "New password",
       name: "new_password",
       events: {
@@ -102,7 +106,7 @@ export class FormChangePassword extends Block<FormLoginProps> {
     });
     this.children.confirm_password = new Input({
       type: "password",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Confirm password",
       name: "confirm_password",
       events: {
@@ -110,9 +114,10 @@ export class FormChangePassword extends Block<FormLoginProps> {
           this.errorNotify(this.errors.confirm_password);
         },
         input: (e: Event) => {
-          const newPassword = this.children.new_password.getValue();
+          const newPassword = (this.children.new_password as Input).getValue();
+          const inputEl = e.target as HTMLInputElement
           this.errors.confirm_password = confirmValidationScheme(
-            e.target.value,
+            inputEl.value,
             newPassword
           );
           this.checkIsFormFilledAndValid();
@@ -139,6 +144,7 @@ export class FormChangePassword extends Block<FormLoginProps> {
 
   errorNotify(field: string[] | undefined) {
     if (field && field.length > 0) {
+      //@ts-ignore
       new Notification(field);
     }
   }

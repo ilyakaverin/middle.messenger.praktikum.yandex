@@ -1,6 +1,5 @@
 import { Block } from "../../services/block";
 import template from "./index.pug";
-
 interface IMessageProps {
   content: string;
   time: string;

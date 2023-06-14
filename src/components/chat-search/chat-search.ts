@@ -4,6 +4,7 @@ import { Input } from "../text-input";
 import { debounce } from "../../utils";
 import store from "../../store";
 import { userSearch } from "../../sources/user";
+import cn from "../../utils/classnames";
 
 interface ChatSearchProps {
   disabled: boolean;
@@ -17,7 +18,7 @@ export class SearchUsers extends Block<ChatSearchProps> {
   init() {
     this.children.input = new Input({
       type: "text",
-      classNames: ["text-input", "chatlist-input"],
+      classNames: cn(["text-input", "chatlist-input"]),
       placeholder: "Search",
       name: "search_user",
       disabled: true,
@@ -31,13 +32,14 @@ export class SearchUsers extends Block<ChatSearchProps> {
   }
 
   async handleInput(e: Event) {
-    if (!e.target.value) {
+    const inputEl = e.target as HTMLInputElement
+    if (!inputEl.value) {
       return;
     }
 
     store.set("searchResult", []);
 
-    const response = await userSearch({ login: e.target.value });
+    const response = await userSearch({ login: inputEl.value });
 
     store.set("searchResult", response.message);
   }

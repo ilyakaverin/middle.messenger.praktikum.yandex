@@ -7,17 +7,17 @@ import router from "../../services/router";
 import { signin } from "../../sources/auth";
 import { routes } from "../../interfaces/enums";
 import { isLogged } from "../../sources/constants";
+import cn from "../../utils/classnames";
 
 interface FormLoginProps {
-  type?: string;
-  label: string;
+  label?: string;
   classNames?: string[];
   events?: {
     submit: () => void;
   };
 }
 
-export class FormLogin extends Block<FormLoginProps> {
+export class FormLogin extends Block {
   constructor(props: FormLoginProps) {
     super({ ...props });
   }
@@ -31,7 +31,7 @@ export class FormLogin extends Block<FormLoginProps> {
     this.children.buttonLogin = new Button({
       type: "submit",
       label: "Enter",
-      classNames: ["button", "green"],
+      classNames: cn(["button", "green"]),
       disabled: true,
       events: {
         click: async (e) => {
@@ -41,7 +41,7 @@ export class FormLogin extends Block<FormLoginProps> {
 
           try {
             this.loader(this.children.buttonLogin as Button, "loading", true);
-            const response = await signin(formData);
+            const response = await signin(formData) as XMLHttpRequest;
 
             if (response.status !== 200) {
               throw new Error(JSON.parse(response.responseText).reason);
@@ -63,7 +63,7 @@ export class FormLogin extends Block<FormLoginProps> {
     });
     this.children.buttonRegister = new Button({
       label: "Register",
-      classNames: ["button", "purple"],
+      classNames: cn(["button", "purple"]),
       events: {
         click: () => {
           router.go(routes.register);
@@ -72,7 +72,7 @@ export class FormLogin extends Block<FormLoginProps> {
     });
     this.children.inputLogin = new Input({
       type: "text",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Login",
       name: "login",
       autocomplete: "off",
@@ -87,7 +87,7 @@ export class FormLogin extends Block<FormLoginProps> {
     });
     this.children.inputPassword = new Input({
       type: "password",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Password",
       name: "password",
       events: {

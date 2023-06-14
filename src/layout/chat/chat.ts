@@ -18,7 +18,7 @@ export class Chat extends Block {
     super({ ...props });
   }
 
-  private pingWS: number;
+  private pingWS: ReturnType<typeof setTimeout>;
 
   init() {
     if (!isLogged()) {
@@ -35,8 +35,8 @@ export class Chat extends Block {
         });
       });
 
-    this.children.chat_messages = new ChatMessages({});
-    this.children.chat_input = new ChatInput({ socket: {} });
+    this.children.chat_messages = new ChatMessages({token: '', currentChat: null, userId: null});
+    this.children.chat_input = new ChatInput({ socket: {}, message: undefined });
     this.children.chat_list = new ChatList({ chats: [] });
     this.children.usersSearch = new ChatAddUser({
       chatId: null,

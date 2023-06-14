@@ -1,9 +1,9 @@
 import { Block } from "../../services/block";
 import { deleteUserFromChat, getChatUsers } from "../../sources/chat";
 import store from "../../store";
+import cn from "../../utils/classnames";
 import { Button } from "../button/button";
 import template from "./index.pug";
-
 interface IUserProps {
   title: string;
   id: number;
@@ -16,7 +16,7 @@ export class User extends Block {
     super({ type: "button", ...props });
 
     if (this.props.owner === this.props.id) {
-      this.children.button.setProps({
+      (this.children.button as Button).setProps({
         label: "its me!",
         disabled: true,
         classNames: ["button", "green", "button-small"],
@@ -27,7 +27,7 @@ export class User extends Block {
   init() {
     this.children.button = new Button({
       label: "Delete",
-      classNames: ["button", "purple", "button-small"],
+      classNames: cn(["button", "purple", "button-small"]),
       disabled: false,
       events: {
         click: async (e: Event) => {

@@ -1,6 +1,6 @@
 import { isEqual } from "../utils";
 import { EventBus } from "./event-bus";
-import { nanoid } from "nanoid";
+import { v4 as uuidv4 } from 'uuid';
 
 export class Block<P extends Record<string, any> = any> {
   static EVENTS = {
@@ -10,7 +10,7 @@ export class Block<P extends Record<string, any> = any> {
     FLOW_RENDER: "flow:render",
   } as const;
 
-  public id = nanoid(6);
+  public id = uuidv4();
   protected props: P;
   protected children: Record<string, Block | Block[]>;
   private eventBus: () => EventBus;
@@ -122,7 +122,7 @@ export class Block<P extends Record<string, any> = any> {
     Object.assign(this.props, nextProps);
   };
 
-  setChildren = (nextProps: Partial<P>) => {
+  setChildren: (nextProps: Record<string, any>) => void = (nextProps: Partial<P>) => {
     if (!nextProps) {
       return;
     }

@@ -5,6 +5,7 @@ import { formatDate } from "../../utils";
 import { Message } from "../message/message";
 import template from "./index.pug";
 
+
 interface ChatMessagesProps {
   token: string;
   currentChat: number;
@@ -12,6 +13,14 @@ interface ChatMessagesProps {
   events?: {
     click: () => void;
   };
+}
+
+interface IMessage {
+  content: string;
+  type: string;
+  time: string;
+  user_id: number;
+  id: number
 }
 
 export class ChatMessages extends Block<ChatMessagesProps> {
@@ -25,9 +34,9 @@ export class ChatMessages extends Block<ChatMessagesProps> {
 
       if (messages.length > 0) {
         const components = messages
-          .filter((message) => message.type === "message")
+          .filter((message: IMessage) => message.type === "message")
           .map(
-            (message) =>
+            (message: IMessage) =>
               new Message({
                 content: message.content,
                 time: formatDate(message.time),

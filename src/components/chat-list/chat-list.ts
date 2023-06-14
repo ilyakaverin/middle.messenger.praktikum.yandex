@@ -7,9 +7,10 @@ import { StoreEvents, routes } from "../../interfaces/enums";
 import { ChatChannel } from "../chat-channel/chat-channel";
 import store from "../../store";
 import { cutStringIfLong, isEqual } from "../../utils";
+import cn from "../../utils/classnames";
 
 interface ChatListProps {
-  chats: ChatChannel[];
+  chats?: Record<string, unknown>[];
   events?: {
     click: () => void;
   };
@@ -23,7 +24,7 @@ export class ChatList extends Block<ChatListProps> {
       const state = store.getState();
 
       const { chats, userId } = state;
-
+      //@ts-ignore toDO
       if (isEqual(chats, this.props.chats)) {
         return;
       } else {
@@ -33,8 +34,8 @@ export class ChatList extends Block<ChatListProps> {
           const components = this.props?.chats.map(
             (chat) =>
               new ChatChannel({
-                chatLabel: cutStringIfLong(chat.title, 9),
-                id: chat.id,
+                chatLabel: cutStringIfLong(chat.title as string, 9),
+                id: chat.id as number,
                 userId,
               })
           );
@@ -48,7 +49,7 @@ export class ChatList extends Block<ChatListProps> {
   init() {
     this.children.button1 = new Button({
       label: "logout",
-      classNames: ["button", "purple", "full-width"],
+      classNames: cn(["button", "purple", "full-width"]),
       events: {
         click: async () => {
           try {
@@ -63,7 +64,7 @@ export class ChatList extends Block<ChatListProps> {
     });
     this.children.button2 = new Button({
       label: "Edit profile",
-      classNames: ["button", "green", "full-width"],
+      classNames: cn(["button", "green", "full-width"]),
       events: {
         click: () => {
           router.go(routes.edit);
@@ -72,7 +73,7 @@ export class ChatList extends Block<ChatListProps> {
     });
     this.children.button3 = new Button({
       label: "New chat",
-      classNames: ["button", "green", "full-width"],
+      classNames: cn(["button", "green", "full-width"]),
       events: {
         click: () => {
           router.go(routes.newChat);

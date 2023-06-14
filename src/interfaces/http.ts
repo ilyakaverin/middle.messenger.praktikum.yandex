@@ -9,6 +9,7 @@ export interface IRequestOptions {
   timeout?: number;
   headers?: Record<string, string>;
   data?: XMLHttpRequestBodyInit;
+  mode?: string
 }
 export type HTTPMethod = (
   url: string,

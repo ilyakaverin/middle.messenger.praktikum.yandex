@@ -5,6 +5,7 @@ import { Input } from "../text-input";
 import store from "../../store";
 import { ConnectStatus, StoreEvents } from "../../interfaces/enums";
 import { Indexed } from "../../interfaces/components";
+import cn from "../../utils/classnames";
 
 interface ChatInputProps {
   socket: Indexed;
@@ -23,9 +24,9 @@ export class ChatInput extends Block<ChatInputProps> {
       this.setProps({ socket });
 
       if (status === ConnectStatus.CONNECTED) {
-        this.children.input.setProps({ disabled: false });
+        (this.children.input as Input).setProps({ disabled: false });
       } else {
-        this.children.input.setProps({ disabled: true });
+        (this.children.input as Input).setProps({ disabled: true });
       }
     });
   }
@@ -33,7 +34,7 @@ export class ChatInput extends Block<ChatInputProps> {
   init() {
     this.children.button = new Button({
       label: "Send",
-      classNames: ["button", "green"],
+      classNames: cn(["button", "green"]),
       disabled: true,
       events: {
         click: (e: Event) => {
@@ -46,21 +47,22 @@ export class ChatInput extends Block<ChatInputProps> {
             })
           );
 
-          this.children.input.setValue("");
+          (this.children.input as Input).setValue("");
         },
       },
     });
 
     this.children.input = new Input({
       type: "text",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Type message here",
       disabled: true,
       name: "message",
       events: {
         blur: (e: Event) => {
           e.preventDefault();
-          this.setProps({ message: e.target.value });
+          const inputEl = e.target as HTMLInputElement
+          this.setProps({ message: inputEl.value });
         },
         input: () => {
           this.checkField();
@@ -70,10 +72,10 @@ export class ChatInput extends Block<ChatInputProps> {
   }
 
   checkField() {
-    if (this.children.input.getValue().length > 0) {
-      this.children.button.setProps({ disabled: false });
+    if ((this.children.input as Input).getValue().length > 0) {
+      (this.children.button as Button).setProps({ disabled: false });
     } else {
-      this.children.button.setProps({ disabled: true });
+      (this.children.button as Button).setProps({ disabled: true });
     }
   }
 
