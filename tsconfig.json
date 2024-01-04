@@ -5,8 +5,12 @@
     "module": "es6",
     "target": "ES2015",
     "allowJs": true,
-    "moduleResolution":"node"
+    "moduleResolution":"node",
+    "baseUrl" : "./src",
+    "paths": {
+      "@interfaces/*": ["./interfaces/*"]
+    }
   },
   "files": ["src/index.ts"],
-  "include": [ "global.d.ts"]
+  "include": [ "global.d.ts"],
 }

@@ -34,12 +34,15 @@ router
   .start();
 
 Notification.requestPermission().then((permission) => {
+
+  const permissionRequestBanner = document.getElementById(
+    "notificationRequest"
+  );
   if (permission === "granted") {
-    const permissionRequestBanner = document.getElementById(
-      "notificationRequest"
-    );
+    
 
     permissionRequestBanner?.remove();
-    // …
+  } else {
+    permissionRequestBanner.style.display = 'flex'
   }
 });

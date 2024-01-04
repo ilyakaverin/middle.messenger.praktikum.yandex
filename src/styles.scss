@@ -46,9 +46,10 @@ nav {
 }
 
 header {
-  margin: 55px;
   display: flex;
+  position: absolute;
   align-items: flex-end;
+  display: none;
   
 
   span {

@@ -35,7 +35,7 @@ export class ChatAddUser extends Block {
   }
 
   init() {
-    this.children.input = new SearchUsers({disabled: true});
+    this.children.input = new SearchUsers({disabled: false });
 
     this.children.addUser = new Button({
       label: "Add",

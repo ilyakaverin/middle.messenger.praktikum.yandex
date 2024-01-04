@@ -19,16 +19,13 @@ export class SearchUsers extends Block<ChatSearchProps> {
     this.children.input = new Input({
       type: "text",
       classNames: cn(["text-input", "chatlist-input"]),
-      placeholder: "Search",
+      placeholder: "Searcha",
       name: "search_user",
-      disabled: true,
       autocomplete: "off",
       events: {
         input: debounce(this.handleInput, 1000),
       },
     });
-
-    this.children.input.setProps({ disabled: this.props.disabled });
   }
 
   async handleInput(e: Event) {
