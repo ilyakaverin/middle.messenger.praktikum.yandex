@@ -5,6 +5,7 @@ export enum routes {
   edit = "/settings",
   changePassword = "/change-password",
   newChat = "/new-chat",
+  notFound = "/404",
 }
 export enum StoreEvents {
   Updated = "updated",

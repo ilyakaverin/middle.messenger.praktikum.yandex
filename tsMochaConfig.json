@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "noImplicitAny": true,
+      "module": "CommonJs",
+      "target": "ES2015",
+      "allowJs": true,
+      "moduleResolution":"node"
+    },
+    "files": ["src/index.ts"],
+    "include": [ "global.d.ts", "./src/**/*.test.ts", "./src/**/*.ts"]
+  }
+  

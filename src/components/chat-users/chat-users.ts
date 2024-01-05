@@ -10,6 +10,18 @@ interface IChatUsersProps {
   chatId: number;
 }
 
+interface IUser {
+  id: number;
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  email: string;
+  phone: string;
+  avatar: string;
+  role: string;
+}
+
 export class ChatUsers extends Block {
   constructor(props: IChatUsersProps) {
     super({ type: "div", ...props });
@@ -31,7 +43,7 @@ export class ChatUsers extends Block {
           this.setProps({ users: chatUsers });
 
           const components = this.props.users.map(
-            (user) =>
+            (user: IUser) =>
               new User({
                 title: user.login,
                 id: user.id,

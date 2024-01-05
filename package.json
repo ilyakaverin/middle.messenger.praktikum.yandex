@@ -1,16 +1,15 @@
 {
-  "name": "middle.messenger.praktikum.yandex",
+  "name": "retro-chat",
   "browserslist": "> 0.5%, last 2 versions, not dead",
-  "version": "0.0.1",
-  "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
+  "version": "1.0.0",
+  "description": "chat project",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node server.mjs",
-    "start": "parcel src/pages/index.html -p 3000",
-    "build": "parcel build src/pages/index.html"
+    "test": "ts-mocha -p ./tsMochaConfig.json --require ./test/index.js 'src/**/*.spec.ts'",
+    "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm"
   },
   "engines": {
-    "node": ">=14.21.3"
+    "node": ">=16.20.0"
   },
   "repository": {
     "type": "git",
@@ -26,26 +25,36 @@
   },
   "homepage": "https://github.com/ilyakaverin/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "@parcel/config-default": "^2.8.3",
-    "@parcel/transformer-pug": "^2.8.3",
-    "@parcel/transformer-sass": "^2.8.3",
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@babel/register": "^7.22.5",
+    "@types/chai": "^4.3.5",
+    "@types/jsdom": "^21.1.1",
+    "@types/mocha": "^10.0.1",
+    "@types/uuid": "^9.0.2",
     "assert": "^2.0.0",
     "buffer": "^5.7.1",
+    "chai": "^4.3.7",
+    "css-loader": "^6.8.1",
     "eslint": "^8.35.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
+    "jsdom": "^22.1.0",
+    "mocha": "^10.2.0",
     "os-browserify": "^0.3.0",
-    "parcel": "^2.8.3",
-    "parcel-transformer-pug-precompile": "^1.0.6",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
+    "pug": "^3.0.2",
+    "pug-plugin": "^4.9.7",
+    "sass": "^1.63.3",
     "stylelint": "^15.4.0",
     "stylelint-config-standard-scss": "^7.0.1",
-    "typescript": "^5.0.3"
+    "ts-loader": "^9.4.3",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.1.3"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "nanoid": "^4.0.2",
-    "pug": "^3.0.2"
+    "uuid": "^9.0.0"
   }
 }

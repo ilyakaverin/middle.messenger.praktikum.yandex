@@ -1,6 +1,6 @@
 export interface InputProps {
   type?: string;
-  classNames: string[];
+  classNames: string;
   placeholder?: string;
   disabled?: boolean;
   autocomplete?: "off" | "on";

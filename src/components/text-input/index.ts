@@ -1,8 +1,8 @@
-import { InputProps } from "../../interfaces/components";
-import { Block } from "../../services/block";
+import { InputProps } from "@interfaces/components";
+import { Block } from "@services/block";
 import template from "./index.pug";
 
-export class Input extends Block<InputProps> {
+export class Input extends Block {
   constructor(props: InputProps) {
     super({ type: "text", ...props });
   }

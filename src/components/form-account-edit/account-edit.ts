@@ -18,17 +18,18 @@ import { getUser } from "../../sources/auth";
 import { editScheme, isLogged } from "../../sources/constants";
 import { Avatar } from "../avatar/avatar";
 import store from "../../store";
+import cn from "../../utils/classnames";
 
 interface FormAccountEditProps {
   type?: string;
-  label: string;
+  label?: string;
   classNamess?: string[];
   events?: {
     submit: () => void;
   };
 }
 
-export class FormAccountEdit extends Block<FormAccountEditProps> {
+export class FormAccountEdit extends Block  {
   constructor(props: FormAccountEditProps) {
     super({ ...props });
 
@@ -38,9 +39,9 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
       if (userData) {
         editScheme.forEach((key) => {
           if (key === "avatar") {
-            this.children.avatar.setProps({ src: userData[key] });
+            (this.children.avatar as Block).setProps({ src: userData[key] });
           } else {
-            this.children[key].setValue(userData[key]);
+            (this.children[key] as Input).setValue(userData[key]);
           }
         });
       }
@@ -56,7 +57,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
 
     this.children.button1 = new Button({
       label: "Save",
-      classNames: ["button", "green"],
+      classNames: cn(["button", "green"]),
       disabled: true,
       events: {
         click: async (e) => {
@@ -82,7 +83,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.button2 = new Button({
       label: "Change password",
-      classNames: ["button", "purple"],
+      classNames: cn(["button", "purple"]),
       events: {
         click: () => {
           router.go(routes.changePassword);
@@ -91,7 +92,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.button3 = new Button({
       label: "Back to Chat",
-      classNames: ["button", "purple"],
+      classNames: cn(["button", "purple"]),
       events: {
         click: () => {
           router.go(routes.chat);
@@ -100,7 +101,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.login = new Input({
       type: "text",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Login",
       name: "login",
       events: {
@@ -119,7 +120,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.password = new Input({
       type: "password",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Password",
       name: "password",
       events: {
@@ -138,7 +139,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.first_name = new Input({
       type: "text",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Name",
       name: "first_name",
       events: {
@@ -157,7 +158,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.second_name = new Input({
       type: "text",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Surname",
       name: "second_name",
       events: {
@@ -176,7 +177,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.email = new Input({
       type: "email",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "e-mail",
       name: "email",
       events: {
@@ -195,7 +196,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.phone = new Input({
       type: "text",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Phone number",
       name: "phone",
       events: {
@@ -214,7 +215,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
     });
     this.children.display_name = new Input({
       type: "text",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Display name",
       name: "display_name",
       events: {
@@ -234,7 +235,7 @@ export class FormAccountEdit extends Block<FormAccountEditProps> {
 
     this.children.avatar = new Avatar({});
 
-    getUser().then((data: XMLHttpRequest) => {
+    getUser().then((data) => {
       store.set("userData", data);
     });
   }

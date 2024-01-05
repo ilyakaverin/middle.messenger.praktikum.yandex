@@ -5,7 +5,7 @@ const isArrayOrObject = (value: unknown): value is [] | PlainObject => {
   return isPlainObject(value) || isArray(value);
 };
 
-type PlainObject<T = unknown> = {
+export type PlainObject<T = unknown> = {
   [k in string]: T;
 };
 
@@ -27,11 +27,11 @@ export const collectData = (formId: string) => {
   const formData = new FormData(form as HTMLFormElement);
   const keys = [];
   const values: string[] = [];
-
+  //@ts-ignore
   for (const key of formData.keys()) {
     keys.push(key);
   }
-
+  //@ts-ignore
   for (const value of formData.values()) {
     values.push(value as string);
   }
@@ -55,7 +55,7 @@ export const isEqual = (lhs: PlainObject | string, rhs: PlainObject) => {
   }
 
   for (const [key, value] of Object.entries(lhs)) {
-    const rightValue = rhs[key];
+    const rightValue = rhs[key as string];
     if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
       if (isEqual(value as PlainObject, rightValue as PlainObject)) {
         continue;
@@ -155,7 +155,7 @@ export const formatDate = (dateString: string): string => {
 };
 
 export const debounce = (func: Function, delay: number) => {
-  let timer: number;
+  let timer: ReturnType<typeof setTimeout>;
 
   return function (...args: unknown[]) {
     clearTimeout(timer);
@@ -168,7 +168,7 @@ export const debounce = (func: Function, delay: number) => {
 
 export const throttle = (func: Function, delay: number) => {
   let lastExecutionTime = 0;
-  let timeout: number;
+  let timeout: ReturnType<typeof setTimeout>;
 
   return function (...args: unknown[]) {
     const currentTime = Date.now();
@@ -189,9 +189,9 @@ export const throttle = (func: Function, delay: number) => {
 
 export const collectCheckboxValues = (name: string, formName: string) => {
   const form = document.getElementById(formName);
-  const checkboxes = form.querySelectorAll(`input[name="${name}"]:checked`);
+  const checkboxes = form!.querySelectorAll(`input[name="${name}"]:checked`);
 
-  return Array.from(checkboxes).map((checkbox) => checkbox.value);
+  return Array.from(checkboxes).map((checkbox) => (checkbox as HTMLInputElement).value );
 };
 
 export const cutStringIfLong = (str: string, maxLength: number): string => {

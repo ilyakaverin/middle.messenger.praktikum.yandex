@@ -3,9 +3,13 @@ import { Block } from "../../services/block";
 import { addUser, getChatUsers } from "../../sources/chat";
 import store from "../../store";
 import { collectCheckboxValues, } from "../../utils";
+import cn from "../../utils/classnames";
 import { Button } from "../button/button";
 import { SearchUsers } from "../chat-search/chat-search";
+import { Input } from "../text-input";
 import template from "./index.pug";
+
+
 
 interface IChatAdduserProps {
   chatId: number;
@@ -23,19 +27,19 @@ export class ChatAddUser extends Block {
       this.setProps({ chatId: currentChat, users: searchResult });
 
       if (status === ConnectStatus.CONNECTED) {
-        this.children.addUser.setProps({ disabled: false });
+        (this.children.addUser as Block).setProps({ disabled: false });
       } else {
-        this.children.addUser.setProps({ disabled: true });
+        (this.children.addUser as Block).setProps({ disabled: true });
       }
     });
   }
 
   init() {
-    this.children.input = new SearchUsers({});
+    this.children.input = new SearchUsers({disabled: false });
 
     this.children.addUser = new Button({
       label: "Add",
-      classNames: ["button", "green"],
+      classNames: cn(["button", "green"]),
       events: {
         click: async () => {
           const data = collectCheckboxValues("user", "form-add-users");
@@ -51,7 +55,7 @@ export class ChatAddUser extends Block {
           };
 
           try {
-            const response = await addUser(request);
+            const response = await addUser(request) as XMLHttpRequest;
 
             if (response.status !== 200) {
               throw new Error("Error");
@@ -64,7 +68,7 @@ export class ChatAddUser extends Block {
             new Notification(e);
           }
 
-          this.children.input.children.input.setValue("");
+          ((this.children.input as ChatAddUser).children.input as Input ).setValue("");
         },
       },
     });

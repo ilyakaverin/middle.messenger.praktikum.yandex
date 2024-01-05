@@ -15,7 +15,7 @@ export class Route {
   }
 
   public match(pathname: string) {
-    return isEqual(pathname, this.pathname);
+    return isEqual(pathname, this.pathname as any);
   }
 
   public render() {

@@ -8,9 +8,14 @@ import { routes } from "../../interfaces/enums";
 import { newChatValidationScheme } from "../../utils/validation";
 import { createChat } from "../../sources/chat";
 import { isLogged } from "../../sources/constants";
+import cn from '../../utils/classnames'
+
+interface INewChat {
+  [key: string]: any
+}
 
 export class NewChat extends Block<any> {
-  constructor(props) {
+  constructor(props: INewChat) {
     super({ ...props });
   }
 
@@ -23,7 +28,7 @@ export class NewChat extends Block<any> {
 
     this.children.createChat = new Button({
       label: "Create chat",
-      classNames: ["button", "green"],
+      classNames: cn(["button", "green"]),
       disabled: true,
       events: {
         click: async (e) => {
@@ -50,7 +55,7 @@ export class NewChat extends Block<any> {
     });
     this.children.backToMessenger = new Button({
       label: "Back to Messenger",
-      classNames: ["button", "purple"],
+      classNames: cn(["button", "purple"]),
       events: {
         click: () => {
           router.go(routes.chat);
@@ -59,7 +64,7 @@ export class NewChat extends Block<any> {
     });
     this.children.newChatInput = new Input({
       type: "text",
-      classNames: ["text-input"],
+      classNames: "text-input",
       placeholder: "Chat name",
       name: "title",
       events: {
@@ -92,6 +97,7 @@ export class NewChat extends Block<any> {
 
   errorNotify(field: string[] | undefined) {
     if (field && field.length > 0) {
+      //@ts-ignore Notification accepts arrays
       new Notification(field);
     }
   }

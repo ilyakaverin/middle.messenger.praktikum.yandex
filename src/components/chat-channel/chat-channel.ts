@@ -2,13 +2,16 @@ import { ConnectStatus, StoreEvents } from "../../interfaces/enums";
 import { Block } from "../../services/block";
 import { deleteChat, getChats } from "../../sources/chat";
 import store from "../../store";
+import cn from "../../utils/classnames";
 import { Button } from "../button/button";
 import template from "./index.pug";
+
 
 interface IChatChanelProps {
   chatLabel: string;
   id: number;
-  status: "connected" | "disconnected" | "connecting" | "disconnecting";
+  status?: "connected" | "disconnected" | "connecting" | "disconnecting";
+  userId: number,
 }
 
 export class ChatChannel extends Block {
@@ -39,7 +42,7 @@ export class ChatChannel extends Block {
     this.children.connect = new Button({
       label: "Connect",
       disabled: false,
-      classNames: ["button", "green", "button-small"],
+      classNames: cn(["button", "green", "button-small"]),
       events: {
         click: () => {
           store.set("currentChat", this.props.id);
@@ -50,7 +53,7 @@ export class ChatChannel extends Block {
     this.children.deleteChat = new Button({
       label: "Delete",
       disabled: false,
-      classNames: ["button", "purple", "button-small"],
+      classNames: cn(["button", "purple", "button-small"]),
       events: {
         click: async () => {
           const request = { chatId: this.props.id };
@@ -82,18 +85,19 @@ export class ChatChannel extends Block {
       ];
 
       if (currentChat === this.props.id) {
-        this.children.connect.setProps({
+        (this.children.connect as Block).setProps({
           label: status,
           events: {
+            // @ts-ignore
             click: this.clickEvents[status],
           },
         });
-        this.children.deleteChat.setProps({ disabled: true });
+        (this.children.deleteChat as Block).setProps({ disabled: true });
       } else if (statusesForDisabling.includes(status)) {
-        this.children.connect.setProps({ disabled: true });
+        (this.children.connect as Block).setProps({ disabled: true });
       } else {
-        this.children.connect.setProps({ disabled: false });
-        this.children.deleteChat.setProps({ disabled: false });
+        (this.children.connect as Block).setProps({ disabled: false });
+        (this.children.deleteChat as Block).setProps({ disabled: false });
       }
     });
   }

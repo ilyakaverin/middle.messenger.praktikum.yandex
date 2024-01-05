@@ -1,8 +1,8 @@
-import { Indexed } from "../interfaces/components";
-import { ConnectStatus, StoreEvents } from "../interfaces/enums";
+import { Indexed } from "@interfaces/components";
+import { ConnectStatus, StoreEvents } from "@interfaces/enums";
 import { EventBus } from "../services/event-bus";
 import { set } from "../utils";
-class Store extends EventBus {
+export class Store extends EventBus {
   private state: Indexed = {
     status: ConnectStatus.DISCONNECTED,
   };

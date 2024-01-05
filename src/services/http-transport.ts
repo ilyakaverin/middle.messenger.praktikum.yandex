@@ -1,4 +1,4 @@
-import { REQUEST_TYPE, IRequestOptions } from "../interfaces/http";
+import { REQUEST_TYPE, IRequestOptions, HTTPMethod } from "../interfaces/http";
 
 function queryStringify(data: XMLHttpRequestBodyInit) {
   return `?${Object.entries(data)
@@ -7,27 +7,27 @@ function queryStringify(data: XMLHttpRequestBodyInit) {
 }
 
 class HTTPTransport {
-  get = (url: string, options: IRequestOptions = {}) =>
+  get: HTTPMethod = (url, options = {}) =>
     this.request(
       url,
       { ...options, method: REQUEST_TYPE.GET },
       options.timeout
     );
-  post = (url: string, options: IRequestOptions = {}) =>
+  post: HTTPMethod = (url, options = {}) =>
     this.request(
       url,
       { ...options, method: REQUEST_TYPE.POST },
       options.timeout
     );
 
-  put = (url: string, options: IRequestOptions = {}) =>
+  put: HTTPMethod = (url, options = {}) =>
     this.request(
       url,
       { ...options, method: REQUEST_TYPE.PUT },
       options.timeout
     );
 
-  delete = (url: string, options: IRequestOptions = {}) =>
+  delete: HTTPMethod = (url, options = {}) =>
     this.request(
       url,
       { ...options, method: REQUEST_TYPE.DELETE },
@@ -50,7 +50,6 @@ class HTTPTransport {
         method as REQUEST_TYPE,
         method === REQUEST_TYPE.GET && !!data ? url + queryStringify(data) : url
       );
-
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
