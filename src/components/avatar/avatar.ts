@@ -1,9 +1,8 @@
-import { Block } from "../../services/block";
-import { getUser } from "../../sources/auth";
-import { setUserAvatar } from "../../sources/user";
-import store from "../../store";
-import cn from "../../utils/classnames";
-import { Input } from "../text-input";
+import { Block } from "@services/block";
+import { getUser } from "@sources/auth";
+import { setUserAvatar } from "@sources/user";
+import store from "@store";
+import { Input } from "@components/text-input";
 import template from "./index.pug";
 
 type IAvatarProps = Record<string, any>

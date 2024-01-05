@@ -1,5 +1,5 @@
-import { Indexed } from "../interfaces/components";
-import { ConnectStatus, StoreEvents } from "../interfaces/enums";
+import { Indexed } from "@interfaces/components";
+import { ConnectStatus, StoreEvents } from "@interfaces/enums";
 import { EventBus } from "../services/event-bus";
 import { set } from "../utils";
 export class Store extends EventBus {

@@ -8,7 +8,11 @@
     "moduleResolution":"node",
     "baseUrl" : "./src",
     "paths": {
-      "@interfaces/*": ["./interfaces/*"]
+      "@interfaces/*": ["./interfaces/*"],
+      "@sources/*": ["./sources/*"],
+      "@services/*": ["./services/*"],
+      "@components/*": ["./components/*"],
+      "@store/*": ["./store/*"]
     }
   },
   "files": ["src/index.ts"],
